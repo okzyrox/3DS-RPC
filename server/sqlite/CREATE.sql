@@ -11,7 +11,8 @@ Create Table friends(
   joinable boolean,
   gameDescription text,
   lastOnline bigint NOT NULL,
-  jeuFavori bigint NOT NULL
+  jeuFavori bigint NOT NULL,
+  badge text
 );
 
 Create Table config(
