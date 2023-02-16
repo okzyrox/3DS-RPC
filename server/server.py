@@ -90,7 +90,10 @@ def createUser(friendCode:int, addNewInstance:bool = False):
         convertFriendCodeToPrincipalId(friendCode)
         if not addNewInstance:
             raise Exception('UNIQUE constraint failed: friends.friendCode')
-        db.session.execute('INSERT INTO friends (friendCode, online, titleID, updID, lastAccessed, accountCreation, lastOnline, jeuFavori) VALUES (\'%s\', %s, %s, %s, %s, %s, %s, %s)' % (str(friendCode).zfill(12), False, '0', '0', time.time() + 300, time.time(), time.time(), 0))
+        db.session.execute('INSERT INTO friends (friendCode, online, titleID, updID, lastAccessed, accountCreation, lastOnline, jeuFavori, badge) VALUES (\'%s\', %s, %s, %s, %s, %s, %s, %s, %s)' % (str(friendCode).zfill(12), False, '0', '0', time.time() + 300, time.time(), time.time(), 0, 'Member'))
+        # what the hell am i reading (^), theres definitely a better way to do this please god lol
+
+        ### for badge impl, maybe change from 'Member' (default) to something else after creating the user
         db.session.commit()
     except Exception as e:
         if 'UNIQUE constraint failed: friends.friendCode' in str(e):
